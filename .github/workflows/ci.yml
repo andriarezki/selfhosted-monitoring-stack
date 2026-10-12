@@ -1,0 +1,16 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compose file is valid
+        run: cp .env.example .env && docker compose config --quiet
+      - name: ShellCheck scripts
+        run: shellcheck scripts/*.sh
+      - name: Backup script works
+        run: |
+          mkdir -p /tmp/src && echo hello > /tmp/src/kuma.db
+          SRC=/tmp/src DEST=/tmp/out sh scripts/backup.sh
+          tar -tzf /tmp/out/kuma-*.tar.gz | grep -q kuma.db
