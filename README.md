@@ -75,7 +75,7 @@ docker compose pull && docker compose up -d
 | HTTP(S) keyword | homepage contains your brand name | catches "200 OK but broken page" |
 | Certificate expiry | your domain | warns 14 days before SSL expires |
 | TCP port | database / SSH | server reachable even if the web app is down |
-| Ping | office router or VPN endpoint | network-level outages |
+| Ping | branch router or VPN endpoint | network-level outages |
 | Push | a cron job calls the push URL | alerts when a scheduled job stops running |
 
 ## License
